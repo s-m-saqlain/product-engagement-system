@@ -1,0 +1,18 @@
+mongodb://mongo_user:mongo_password@localhost:27017/
+mongodb://mongo_user:mongo_password@localhost:27017/
+
+
+admin
+pass
+
+
+mongo_express_container | Server is open to allow connections from anyone (0.0.0.0)
+mongo_express_container | basicAuth credentials are "admin:pass", it is recommended you change this in your config.js!
+
+
+
+wget https://downloads.mongodb.com/compass/mongodb-compass_1.43.0_amd64.deb
+sudo dpkg -i mongodb-compass_1.43.0_amd64.deb
+sudo apt --fix-broken install
+mongodb-compass
+
