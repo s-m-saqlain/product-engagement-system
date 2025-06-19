@@ -6,20 +6,27 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token') || '');
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (token) {
-      getUser(token)
-        .then((response) => setUser(response.data))
-        .catch(() => {
+    const fetchUser = async () => {
+      if (token) {
+        try {
+          const response = await getUser(token);
+          setUser(response.data);
+        } catch (err) {
           setToken('');
+          setUser(null);
           localStorage.removeItem('token');
-        });
-    }
+        }
+      }
+      setIsLoading(false);
+    };
+    fetchUser();
   }, [token]);
 
   return (
-    <AuthContext.Provider value={{ token, setToken, user, setUser }}>
+    <AuthContext.Provider value={{ token, setToken, user, setUser, isLoading }}>
       {children}
     </AuthContext.Provider>
   );

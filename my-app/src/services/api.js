@@ -13,6 +13,10 @@ export const login = (email, password) => {
   return apiClient.post('/auth/login', { email, password });
 };
 
+export const register = (email, password) => {
+  return apiClient.post('/auth/register', { email, password });
+};
+
 export const getUser = (token) => {
   setAuthToken(token);
   return apiClient.get('/auth/me');
